@@ -30,6 +30,7 @@ setup(name="openstack-swift-bulk-delete",
       url="",
       packages=[
           "swiftbulkdelete",
+          "swiftbulkdelete/auth",
       ],
       package_data={
       },
