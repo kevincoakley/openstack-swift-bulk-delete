@@ -25,4 +25,8 @@ def parse_arguments():
                         default=0,
                         required=False)
 
+    parser.add_argument('--debug',
+                        dest="debug",
+                        action='store_true')
+
     return vars(parser.parse_args())
