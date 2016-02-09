@@ -41,7 +41,7 @@ class Swift:
         if self.offset_multiplier is 0:
             marker = ""
         else:
-            marker = self.get_object_offset_marker(self.limit * self.offset_multiplier)
+            marker = self.get_object_offset_marker(int(self.limit) * int(self.offset_multiplier))
 
         for swift_object in self.list_objects(self.limit, marker=marker):
             if not swift_object["content_type"] == "application/directory":
