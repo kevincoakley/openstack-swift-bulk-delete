@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import logging
 import requests
 from swiftbulkdelete.exceptions import SwiftException
 
@@ -13,6 +14,9 @@ class Swift:
         self.limit = limit
         self.offset_multiplier = offset_multiplier
         self.object_list = ""
+
+        name = '.'.join([__name__, self.__class__.__name__])
+        self.logger = logging.getLogger(name)
 
     def list_objects(self, limit, marker=""):
         headers = {"X-Auth-Token": self.auth_token}
@@ -43,6 +47,8 @@ class Swift:
         else:
             marker = self.get_object_offset_marker(int(self.limit) * int(self.offset_multiplier))
 
+        self.logger.debug("maker: %s", marker)
+
         for swift_object in self.list_objects(self.limit, marker=marker):
             if not swift_object["content_type"] == "application/directory":
                 self.object_list += "%s/%s\n" % (self.container,
@@ -52,6 +58,8 @@ class Swift:
         headers = {"X-Auth-Token": self.auth_token}
 
         self.get_objects()
+
+        self.logger.debug("Object List: %s", self.object_list)
 
         r = requests.delete("%s/?bulk-delete" % self.storage_url,
                             data=self.object_list,
