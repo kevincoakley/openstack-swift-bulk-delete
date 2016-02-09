@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 
 import requests
-import locale
 from swiftbulkdelete.exceptions import SwiftException
-
-locale.setlocale(locale.LC_ALL, 'en_US')
 
 
 class Swift:
