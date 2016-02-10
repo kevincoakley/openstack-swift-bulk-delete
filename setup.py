@@ -19,7 +19,7 @@ def readme():
 
 
 setup(name="openstack-swift-bulk-delete",
-      version="0.0.1",
+      version="1.0.0",
       description="OpenStack Swift Bulk Delete CLI",
       long_description=readme(),
       author="Kevin Coakley",
