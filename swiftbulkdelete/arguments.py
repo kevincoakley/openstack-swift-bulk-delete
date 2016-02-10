@@ -18,11 +18,11 @@ def parse_arguments():
                         help="Number of Objects to Delete per Operation",
                         required=True)
 
-    parser.add_argument("-o",
-                        metavar="offset_multiplier",
-                        dest="offset_multiplier",
-                        help="Offset Multiplier",
-                        default=0,
+    parser.add_argument("-t",
+                        metavar="threads",
+                        dest="threads",
+                        help="Concurrent Threads",
+                        default=1,
                         required=False)
 
     parser.add_argument('--debug',
