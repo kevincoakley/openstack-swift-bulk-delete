@@ -14,6 +14,7 @@ class Swift:
         self.limit = limit
         self.offset_multiplier = offset_multiplier
         self.object_list = ""
+        self.status_code = requests.codes.ok
 
         name = '.'.join([__name__, self.__class__.__name__])
         self.logger = logging.getLogger(name)
@@ -64,6 +65,8 @@ class Swift:
         r = requests.delete("%s/?bulk-delete" % self.storage_url,
                             data=self.object_list,
                             headers=headers)
+
+        self.status_code = r.status_code
 
         if r.status_code == requests.codes.ok:
             return r.content
